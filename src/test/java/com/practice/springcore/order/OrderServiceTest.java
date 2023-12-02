@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 import com.practice.springcore.AppConfig;
 import com.practice.springcore.member.Grade;
@@ -18,9 +20,9 @@ class OrderServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		AppConfig appConfig = new AppConfig();
-		memberService = appConfig.memberService();
-		orderService = appConfig.orderService();
+		ApplicationContext applicationContext = new AnnotationConfigReactiveWebApplicationContext(AppConfig.class);
+		memberService = applicationContext.getBean("memberService", MemberService.class);
+		orderService = applicationContext.getBean("orderService", OrderService.class);
 	}
 
 	@DisplayName("주문을 생성한다.")

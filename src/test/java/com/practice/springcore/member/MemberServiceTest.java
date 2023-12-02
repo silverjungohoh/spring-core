@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 import com.practice.springcore.AppConfig;
 
@@ -14,8 +16,8 @@ class MemberServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		AppConfig appConfig = new AppConfig();
-		memberService = appConfig.memberService();
+		ApplicationContext applicationContext = new AnnotationConfigReactiveWebApplicationContext(AppConfig.class);
+		memberService = applicationContext.getBean("memberService", MemberService.class);
 	}
 
 	@DisplayName("회원 가입을 한다.")
