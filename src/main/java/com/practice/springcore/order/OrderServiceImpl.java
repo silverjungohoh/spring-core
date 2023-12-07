@@ -3,6 +3,7 @@ package com.practice.springcore.order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.practice.springcore.annotation.MainDiscountPolicy;
 import com.practice.springcore.discount.DiscountPolicy;
 import com.practice.springcore.member.Member;
 import com.practice.springcore.member.MemberRepository;
@@ -12,13 +13,14 @@ import com.practice.springcore.member.MemberRepository;
  */
 
 @Component
+// @RequiredArgsConstructor : final 붙은 필드를 모아서 생성자를 자동으로 만들어줌
 public class OrderServiceImpl implements OrderService {
 
 	private final MemberRepository memberRepository;
 	private final DiscountPolicy discountPolicy;
 
 	@Autowired
-	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+	public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
 		this.memberRepository = memberRepository;
 		this.discountPolicy = discountPolicy;
 	}
