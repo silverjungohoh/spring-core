@@ -1,17 +1,21 @@
 package com.practice.springcore.member;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
 	private final MemberRepository memberRepository;
 
-	@Autowired // 의존 관계를 자동으로 주입
+/* 의존 관계를 자동으로 주입
+	@Autowired
 	public MemberServiceImpl(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
 	}
+*/
 
 	@Override
 	public void join(Member member) {
